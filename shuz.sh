@@ -59,10 +59,13 @@ color_map () {
 # Configuration
 # ------------------------------------------
 
+# Changing these value to affect the logging functions
 SUCCESS_COLOR=${green}
 WARN_COLOR=${yellow}
 ERROR_COLOR=${red}
 
+# Change this value to define the indentation size
+INDENTATION='  '
 
 # Echos
 # ------------------------------------------
@@ -136,7 +139,7 @@ multiline () {
 # Reads multiline text from stdin and outputs it indented.
 #
 indent() {
-  sed 's/^/  /'
+  sed "s/^/${INDENTATION}/"
 }
 
 
