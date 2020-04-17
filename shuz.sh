@@ -67,30 +67,52 @@ ERROR_COLOR=${red}
 # Echos
 # ------------------------------------------
 
+##
+# More consistent echo.
+#
 ec() {
   IFS=' ' printf "%b\n" "$*"
 }
 
+##
+# More consistent echo; without the new line.
+#
 ecn() {
   IFS=' ' printf "%b" "$*"
 }
 
+##
+# Outputs new line.
+# No parameters.
+#
 br() {
   ec ''
 }
 
+##
+# Informs that everything goes as planned.
+#
 success() {
   ec "${SUCCESS_COLOR}$*${noc}"
 }
 
+##
+# Outputs a menasing message.
+#
 warn() {
   ec "${WARN_COLOR}$*${noc}"
 }
 
+##
+# Outputs a scary message.
+#
 error() {
   >&2 ec "${ERROR_COLOR}ERROR: $*${noc}"
 }
 
+##
+# Outputs a message and kills the script.
+#
 fail() {
   error "$@"
   exit 1
@@ -99,10 +121,20 @@ fail() {
 
 # Text manipulation
 # ------------------------------------------
+
+##
+# Reads multiline text from stdin into the specified variable.
+#
+# Parameters:
+#   1: target variable name
+#
 multiline () {
   IFS= read -r -d '' $1
 }
 
+##
+# Reads multiline text from stdin and outputs it indented.
+#
 indent() {
   sed 's/^/  /'
 }
@@ -110,6 +142,11 @@ indent() {
 
 # User input
 # ------------------------------------------
+
+##
+# Ask user a yes/no question.
+# Aborts the script if the answer is no.
+#
 are_you_sure() {
   printf "${WARN_COLOR}$@${noc}"
   read -p " (y/n) " -n 1
