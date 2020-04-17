@@ -131,7 +131,7 @@ fail() {
 # Parameters:
 #   1: target variable name
 #
-multiline () {
+multiline() {
   IFS= read -r -d '' $1
 }
 
