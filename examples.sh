@@ -2,9 +2,9 @@
 
 source shuz.sh
 
-success 'The full path to this script directory will be in script_dir after sourcing'
-success 'shuz.sh. Put somewhere in your PATH and the script becomes completely'
-success 'location independent.'
+success The full path to this script directory will be in script_dir after
+success sourcing shuz.sh. Put somewhere in your PATH and the script becomes
+success completely location independent.
 ec script_dir=${script_dir}
 br
 
@@ -12,10 +12,16 @@ ec "${bold}ec${noc} is a convenient echo replacement"
 ecn "While ${bold}ecn${noc} is echo without the new line"
 br
 ec "Use ${bold}br${noc} to add just the new line"
-ec "It is easy to ${magenta}control ${blue}colors${noc}"
+br
+ec In simple cases you can skip quotes
+ec But beware of the expansion rules:
+ec "    With quotes: *"
+ec "    Without quotes:" *
+br
 
+ec It is easy to ${magenta}control ${blue}color${noc}
 WARN_COLOR=${cyan}
-warn 'It is possible to reconfigure predefined message colors'
+warn It is even possible to reconfigure the predefined message colors
 WARN_COLOR=${yellow}
 
 multiline text <<EOF

@@ -66,6 +66,7 @@ ERROR_COLOR=${red}
 
 # Echos
 # ------------------------------------------
+
 ec() {
   IFS=' ' printf "%b\n" "$*"
 }
@@ -79,15 +80,15 @@ br() {
 }
 
 success() {
-  ec "${SUCCESS_COLOR}$1${noc}"
+  ec "${SUCCESS_COLOR}$*${noc}"
 }
 
 warn() {
-  ec "${WARN_COLOR}$1${noc}"
+  ec "${WARN_COLOR}$*${noc}"
 }
 
 error() {
-  >&2 ec "${ERROR_COLOR}ERROR: $1${noc}"
+  >&2 ec "${ERROR_COLOR}ERROR: $*${noc}"
 }
 
 fail() {
