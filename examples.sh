@@ -44,4 +44,6 @@ ec "Complex colors have the form ${yellow_on_black}<foreground>_on_<background>$
 ec "${bold_on_blue}These are ${black_on_green} the supported ${white_on_magenta} combinations:${noc}"
 color_map
 
-fail 'Just kidding haha'
+assert "This message would have been printed if the previous command had failed"
+
+fail 'This is a command that prints this text and stops the script with an error code'

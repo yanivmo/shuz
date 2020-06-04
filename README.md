@@ -37,6 +37,7 @@ Run `example.sh` for a demonstration of the library features.
 - `warn` - Outputs a menasing message.
 - `error` - Outputs a scary message.
 - `fail` - Outputs a message and kills the script.
+- `assert` - Outputs a message and kills the script if the previous command failed.
 
 ### Terminal colors
 

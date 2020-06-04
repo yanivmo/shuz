@@ -150,6 +150,9 @@ indent() {
 # Ask user a yes/no question.
 # Aborts the script if the answer is no.
 #
+# Parameters:
+#   Interpreted as the question text to be presented to the user.
+#
 are_you_sure() {
   printf "${WARN_COLOR}$@${noc}"
   read -p " (y/n) " -n 1
@@ -160,4 +163,20 @@ are_you_sure() {
   fi
 
   fail ABORTED
+}
+
+
+#
+# ------------------------------------------
+
+##
+# Exit if the previous command did not succeed.
+#
+# Parameters:
+#   Interpreted as the failure massage to be presented to the user.
+#
+assert() {
+  if [[ "$?" != "0" ]]; then
+    fail "$@"
+  fi
 }
