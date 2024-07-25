@@ -1,3 +1,4 @@
+#      https://github.com/yanivmo/shuz
 #
 #      ██████  ██░ ██  █    ██ ▒███████▒
 #    ▒██    ▒ ▓██░ ██▒ ██  ▓██▒▒ ▒ ▒ ▄▀░
@@ -10,7 +11,7 @@
 #          ░   ░  ░  ░   ░       ░ ░    
 #                              ░
 # ----------------[ v1.2.0 ]----------------
-# Shell utilz for ergonomic shell scripting.
+# Shell utilz for ergonomic shell scripting. 
 #
 
 # Environment
