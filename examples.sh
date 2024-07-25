@@ -44,6 +44,11 @@ ec "Complex colors have the form ${yellow_on_black}<foreground>_on_<background>$
 ec "${bold_on_blue}These are ${black_on_green} the supported ${white_on_magenta} combinations:${noc}"
 color_map
 
-assert "This message would have been printed if the previous command had failed"
+assert_success "This message would have been printed if the previous command had failed"
+br
+
+ec "use ${bold}expect_command${noc} or ${bold}assert_command${noc} to check command existence:"
+expect_command bash && ec "> ${cyan}expect_command bash${noc}" && success "Found!"
+br
 
 fail 'This is a command that prints this text and stops the script with an error code'

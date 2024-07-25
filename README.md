@@ -1,6 +1,6 @@
 # shuz
 
-Shell scripting utilz for aficionados of aesthetic scripts.
+Shell utilz for ergonomic shell scripting.
 
 This is a collection of simple shell scripting utilities that I cultivated over
 the years of writing uncountable amount of scripts in Linux/MacOS environments.

@@ -1,3 +1,17 @@
+#
+#      ██████  ██░ ██  █    ██ ▒███████▒
+#    ▒██    ▒ ▓██░ ██▒ ██  ▓██▒▒ ▒ ▒ ▄▀░
+#    ░ ▓██▄   ▒██▀▀██░▓██  ▒██░░ ▒ ▄▀▒░ 
+#      ▒   ██▒░▓█ ░██ ▓▓█  ░██░  ▄▀▒   ░
+#    ▒██████▒▒░▓█▒░██▓▒▒█████▓ ▒███████▒
+#    ▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░▒▓▒ ▒ ▒ ░▒▒ ▓░▒░▒
+#    ░ ░▒  ░ ░ ▒ ░▒░ ░░░▒░ ░ ░ ░░▒ ▒ ░ ▒
+#    ░  ░  ░   ░  ░░ ░ ░░░ ░ ░ ░ ░ ░ ░ ░
+#          ░   ░  ░  ░   ░       ░ ░    
+#                              ░
+# ----------------[ v1.2.0 ]----------------
+# Shell utilz for ergonomic shell scripting.
+#
 
 # Environment
 # ------------------------------------------
@@ -166,17 +180,40 @@ are_you_sure() {
 }
 
 
-#
+# Assertions and expectations
 # ------------------------------------------
 
 ##
-# Exit if the previous command did not succeed.
+# Kill the script with error code if the previous command did not succeed.
 #
 # Parameters:
 #   Interpreted as the failure massage to be presented to the user.
 #
-assert() {
+assert_success() {
   if [[ "$?" != "0" ]]; then
     fail "$@"
   fi
+}
+
+##
+# Returns error if the requiested command could not be found.
+#
+# Parameters:
+#   The command to search for. Could be a shell built-in command
+#   or an executable found in PATH.
+#
+expect_command() {
+  command -v "$@" &> /dev/null
+}
+
+##
+# Kill the script with error code if the requiested command could
+# not be found.
+#
+# Parameters:
+#   The command to search for. Could be a shell built-in command
+#   or an executable found in PATH.
+#
+assert_command() {
+  expect_command "$@" || fail "${noc}Failed to find command ${ERROR_COLOR}$@${noc}"
 }
