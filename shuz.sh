@@ -10,7 +10,7 @@
 #    ░  ░  ░   ░  ░░ ░ ░░░ ░ ░ ░ ░ ░ ░ ░
 #          ░   ░  ░  ░   ░       ░ ░    
 #                              ░
-# ----------------[ v1.2.0 ]----------------
+# ----------------[ v1.3.0 ]----------------
 # Shell utilz for ergonomic shell scripting. 
 #
 
@@ -81,6 +81,10 @@ ERROR_COLOR=${red}
 
 # Change this value to define the indentation size
 INDENTATION='  '
+
+# THIS_OS is "macos" on Mac and "linux" everywhere else
+# naive but works for my simple needs :)
+[ "$(uname)" = "Darwin" ] && THIS_OS=macos || THIS_OS=linux
 
 # Echos
 # ------------------------------------------
