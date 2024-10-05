@@ -21,6 +21,10 @@
 # naive but works for my simple needs :)
 [ "$(uname)" = "Darwin" ] && THIS_OS=macos || THIS_OS=linux
 
+# THIS_SHELL is "zsh" on Zsh and "bash" everywhere else
+# even more naive, sorry -\_(ツ)_/-
+[ -n "$ZSH_VERSION" ] && THIS_SHELL=zsh || THIS_SHELL=bash
+
 
 # Terminal colors
 # ------------------------------------------
@@ -163,6 +167,21 @@ shuz::indent() {
 # ------------------------------------------
 
 ##
+# Read one character from stdin.
+#
+# Parameters:
+#   The prompt to show the user.
+#
+shuz::read_char() {
+  if [ "${THIS_SHELL}" = "zsh" ]; then
+    read -r -q "READ_CHAR?$@"
+  else
+    read -p "$@" -r -n 1 READ_CHAR
+  fi
+  shuz::ecn "${READ_CHAR}"
+}
+
+##
 # Ask user a yes/no question.
 # Aborts the script if the answer is no.
 #
@@ -170,11 +189,13 @@ shuz::indent() {
 #   Interpreted as the question text to be presented to the user.
 #
 shuz::are_you_sure() {
+  local char
+
   shuz::ecn "${WARN_COLOR}$@${noc}"
-  read -r -q "REPLY? (y/n) "
+  char=$(shuz::read_char " (y/n) ")
   shuz::br
 
-  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  if [[ "${char}" =~ ^[Yy]$ ]]; then
     return 0
   fi
 

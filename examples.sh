@@ -1,13 +1,6 @@
 #!/usr/bin/env zsh
 
-script_dir="${0:A:h}"
-source ${script_dir}/shuz.sh
-
-shuz::success The full path to this script directory will be in script_dir after
-shuz::success sourcing shuz.sh. Put somewhere in your PATH and the script becomes
-shuz::success completely location independent.
-shuz::ec script_dir=${script_dir}
-shuz::br
+source shuz.sh
 
 shuz::ec "${bold}ec${noc} is a convenient echo replacement"
 shuz::ecn "While ${bold}ecn${noc} is echo without the new line"

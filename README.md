@@ -8,6 +8,8 @@ They are definitely opinionated, are in no way intended to address all the
 possible scripting problems or give a complete solution to anything. But they
 are battle proven and do their simple job very well.
 
+Supports Bash and Zsh.
+
 ## Quick start
 
 1. Clone the repository or just download `shuz.sh`.
