@@ -8,21 +8,11 @@ They are definitely opinionated, are in no way intended to address all the
 possible scripting problems or give a complete solution to anything. But they
 are battle proven and do their simple job very well.
 
-
 ## Quick start
 
 1. Clone the repository or just download `shuz.sh`.
 2. Make sure `shuz.sh` location is in `PATH`.
 3. Add `source shuz.sh` to the beginning of your shell script.
-
-This library uses a number of [bashisms](https://en.wiktionary.org/wiki/bashism)
-as a compromise between usability, simplicity and portability. To mitigate most 
-portability issues, always start your scripts with this shebang:
-
-```shell script
-#!/usr/bin/env bash
-```
-
 
 ## Overview
 
@@ -30,14 +20,21 @@ Run `example.sh` for a demonstration of the library features.
 
 ### Terminal output functions
 
-- `ec` - More consistent echo.
-- `ecn` - More consistent echo; without the new line.
-- `br` - Outputs new line.
-- `success` - Informs that everything goes as planned.
-- `warn` - Outputs a menasing message.
-- `error` - Outputs a scary message.
-- `fail` - Outputs a message and kills the script.
-- `assert` - Outputs a message and kills the script if the previous command failed.
+- `shuz::ec` - More consistent echo.
+- `shuz::ecn` - More consistent echo; without the new line.
+- `shuz::br` - Outputs new line.
+- `shuz::success` - Informs that everything goes as planned.
+- `shuz::warn` - Outputs a menasing message.
+- `shuz::error` - Outputs a scary message.
+- `shuz::fail` - Outputs a message and kills the script.
+
+### Assertions and expectations
+
+- `shuz::assert_success` - Outputs a message and kills the script if the
+   previous command failed.
+- `shuz::expect_command`- Succeeds if the command in the argument can be found.
+- `shuz::assert_command`- Outputs a message and kills the script if the
+   command in the argument cannot be found.
 
 ### Terminal colors
 
@@ -52,6 +49,6 @@ ec "The last word will be printed in ${blue}blue${noc}"
 
 ### Other functions
 
-- `multiline` - Reads multiline text from stdin into a variable.
-- `indent` - Reads multiline text from stdin and outputs it indented.
-- `are_you_sure` - Ask user a yes/no question.
+- `shuz::multiline` - Reads multiline text from stdin into a variable.
+- `shuz::indent` - Reads multiline text from stdin and outputs it indented.
+- `shuz::are_you_sure` - Ask user a yes/no question.

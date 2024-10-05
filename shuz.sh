@@ -10,15 +10,16 @@
 #    ░  ░  ░   ░  ░░ ░ ░░░ ░ ░ ░ ░ ░ ░ ░
 #          ░   ░  ░  ░   ░       ░ ░    
 #                              ░
-# ----------------[ v1.3.0 ]----------------
+# ----------------[ v2.0.0 ]----------------
 # Shell utilz for ergonomic shell scripting. 
 #
 
 # Environment
 # ------------------------------------------
 
-# Stores sourcing script location in script_dir variable
-script_dir=$(cd "$(dirname "${BASH_SOURCE[1]}")" && pwd)
+# THIS_OS is "macos" on Mac and "linux" everywhere else
+# naive but works for my simple needs :)
+[ "$(uname)" = "Darwin" ] && THIS_OS=macos || THIS_OS=linux
 
 
 # Terminal colors
@@ -53,20 +54,20 @@ done
 # Draws a table of the available coloring options
 color_map () {
   # Draw the column titles
-  ecn "▼FG   BG►│"
+  shuz::ecn "▼FG   BG►│"
   for ((bg=0; bg < ${#bg_names[*]}; bg++)); do
     printf ' %8s ' "${bg_names[bg]}"
   done
-  br
-  ec "─────────┼──────────────────────────────────────────────────────────────────────────────────────────"
+  shuz::br
+  shuz::ec "─────────┼──────────────────────────────────────────────────────────────────────────────────────────"
 
   for ((fg=0; fg < ${#fg_names[*]}; fg++)); do
     printf '%-8s │' "${fg_names[fg]}"
     for ((bg=0; bg < ${#bg_names[*]}; bg++)); do
       eval color="\$${fg_names[fg]}_on_${bg_names[bg]}"
-      ecn " ${color} ******* ${noc}"
+      shuz::ecn " ${color} ******* ${noc}"
     done
-    br
+    shuz::br
   done
 }
 
@@ -82,24 +83,20 @@ ERROR_COLOR=${red}
 # Change this value to define the indentation size
 INDENTATION='  '
 
-# THIS_OS is "macos" on Mac and "linux" everywhere else
-# naive but works for my simple needs :)
-[ "$(uname)" = "Darwin" ] && THIS_OS=macos || THIS_OS=linux
-
 # Echos
 # ------------------------------------------
 
 ##
 # More consistent echo.
 #
-ec() {
+shuz::ec() {
   IFS=' ' printf "%b\n" "$*"
 }
 
 ##
 # More consistent echo; without the new line.
 #
-ecn() {
+shuz::ecn() {
   IFS=' ' printf "%b" "$*"
 }
 
@@ -107,36 +104,36 @@ ecn() {
 # Outputs new line.
 # No parameters.
 #
-br() {
-  ec ''
+shuz::br() {
+  shuz::ec ''
 }
 
 ##
 # Informs that everything goes as planned.
 #
-success() {
-  ec "${SUCCESS_COLOR}$*${noc}"
+shuz::success() {
+  shuz::ec "${SUCCESS_COLOR}$*${noc}"
 }
 
 ##
 # Outputs a menasing message.
 #
-warn() {
-  ec "${WARN_COLOR}$*${noc}"
+shuz::warn() {
+  shuz::ec "${WARN_COLOR}$*${noc}"
 }
 
 ##
 # Outputs a scary message.
 #
-error() {
-  >&2 ec "${ERROR_COLOR}ERROR: $*${noc}"
+shuz::error() {
+  >&2 shuz::ec "${ERROR_COLOR}ERROR: $*${noc}"
 }
 
 ##
 # Outputs a message and kills the script.
 #
-fail() {
-  error "$@"
+shuz::fail() {
+  shuz::error "$@"
   exit 1
 }
 
@@ -150,14 +147,14 @@ fail() {
 # Parameters:
 #   1: target variable name
 #
-multiline() {
+shuz::multiline() {
   IFS= read -r -d '' $1
 }
 
 ##
 # Reads multiline text from stdin and outputs it indented.
 #
-indent() {
+shuz::indent() {
   sed "s/^/${INDENTATION}/"
 }
 
@@ -172,16 +169,16 @@ indent() {
 # Parameters:
 #   Interpreted as the question text to be presented to the user.
 #
-are_you_sure() {
-  printf "${WARN_COLOR}$@${noc}"
-  read -p " (y/n) " -n 1
-  printf "\n"
+shuz::are_you_sure() {
+  shuz::ecn "${WARN_COLOR}$@${noc}"
+  read -r -q "REPLY? (y/n) "
+  shuz::br
 
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     return 0
   fi
 
-  fail ABORTED
+  shuz::fail ABORTED
 }
 
 
@@ -194,9 +191,9 @@ are_you_sure() {
 # Parameters:
 #   Interpreted as the failure massage to be presented to the user.
 #
-assert_success() {
+shuz::assert_success() {
   if [[ "$?" != "0" ]]; then
-    fail "$@"
+    shuz::fail "$@"
   fi
 }
 
@@ -207,7 +204,7 @@ assert_success() {
 #   The command to search for. Could be a shell built-in command
 #   or an executable found in PATH.
 #
-expect_command() {
+shuz::expect_command() {
   command -v "$@" &> /dev/null
 }
 
@@ -219,6 +216,6 @@ expect_command() {
 #   The command to search for. Could be a shell built-in command
 #   or an executable found in PATH.
 #
-assert_command() {
-  expect_command "$@" || fail "${noc}Failed to find command ${ERROR_COLOR}$@${noc}"
+shuz::assert_command() {
+  shuz::expect_command "$@" || fail "${noc}Failed to find command ${ERROR_COLOR}$@${noc}"
 }
