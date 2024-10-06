@@ -10,7 +10,7 @@
 #    ░  ░  ░   ░  ░░ ░ ░░░ ░ ░ ░ ░ ░ ░ ░
 #          ░   ░  ░  ░   ░       ░ ░    
 #                              ░
-# ----------------[ v2.0.0 ]----------------
+# ----------------[ v2.0.1 ]----------------
 # Shell utilz for ergonomic shell scripting. 
 #
 
@@ -20,28 +20,29 @@
 # THIS_OS is "macos" on Mac and "linux" everywhere else
 # naive but works for my simple needs :)
 [ "$(uname)" = "Darwin" ] && THIS_OS=macos || THIS_OS=linux
+readonly THIS_OS
 
 # THIS_SHELL is "zsh" on Zsh and "bash" everywhere else
 # even more naive, sorry -\_(ツ)_/-
 [ -n "$ZSH_VERSION" ] && THIS_SHELL=zsh || THIS_SHELL=bash
-
+readonly THIS_SHELL
 
 # Terminal colors
 # ------------------------------------------
 
 # Clears styling
-noc='\033[0m'
+readonly noc='\033[0m'
 
 # Foreground colors
-bold='\033[0;1m'
-black='\033[0;30m'
-red='\033[0;31m'
-green='\033[0;32m'
-yellow='\033[0;33m'
-blue='\033[0;34m'
-magenta='\033[0;35m'
-cyan='\033[0;36m'
-white='\033[0;37m'
+readonly bold='\033[0;1m'
+readonly black='\033[0;30m'
+readonly red='\033[0;31m'
+readonly green='\033[0;32m'
+readonly yellow='\033[0;33m'
+readonly blue='\033[0;34m'
+readonly magenta='\033[0;35m'
+readonly cyan='\033[0;36m'
+readonly white='\033[0;37m'
 
 # Complex colors declaration magic
 fg_names=("bold" "black" "red" "green" "yellow" "blue" "magenta" "cyan" "white")

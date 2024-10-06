@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 source shuz.sh
 
 shuz::ec "${bold}ec${noc} is a convenient echo replacement"

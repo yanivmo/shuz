@@ -18,7 +18,7 @@ Supports Bash and Zsh.
 
 ## Overview
 
-Run `example.sh` for a demonstration of the library features.
+Run `test-zsh.sh` or `test-bash.sh` for a demonstration of the library features.
 
 ### Terminal output functions
 
